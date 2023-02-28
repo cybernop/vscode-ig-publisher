@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        base: [ubuntu]
+        base: [alpine, ubuntu]
     permissions:
       contents: read
       packages: write

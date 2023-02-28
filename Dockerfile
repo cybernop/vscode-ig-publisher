@@ -1,11 +1,14 @@
 FROM ghcr.io/cybernop/vscode-fsh-sushi:3.0.0-beta.1-alpine AS  alpine
 
 RUN apk update \
-    && apk add \
+    && apk add --no-cache \
     openjdk17-jdk \
-    ruby-dev
+    ruby-dev \
+    msttcorefonts-installer \
+    fontconfig
 
 RUN gem install jekyll
+RUN update-ms-fonts
 
 RUN wget -P /workspaces https://raw.githubusercontent.com/HL7/ig-publisher-scripts/main/_updatePublisher.sh \
     && chmod a+x /workspaces/_updatePublisher.sh \

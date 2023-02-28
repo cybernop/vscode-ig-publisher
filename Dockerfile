@@ -1,3 +1,17 @@
+FROM ghcr.io/cybernop/vscode-fsh-sushi:3.0.0-beta.1-alpine AS  alpine
+
+RUN apk update \
+    && apk add \
+    openjdk17-jdk \
+    ruby-dev
+
+RUN gem install jekyll
+
+RUN wget -P /workspaces https://raw.githubusercontent.com/HL7/ig-publisher-scripts/main/_updatePublisher.sh \
+    && chmod a+x /workspaces/_updatePublisher.sh \
+    && sed -i 's/#!\/bin\/bash/#!\/bin\/sh/g' /workspaces/_updatePublisher.sh
+
+
 FROM ghcr.io/cybernop/vscode-fsh-sushi:3.0.0-beta.1-ubuntu AS  ubuntu
 
 RUN apt update \

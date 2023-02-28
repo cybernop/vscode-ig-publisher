@@ -1,4 +1,4 @@
-FROM ghcr.io/cybernop/vscode-fsh-sushi:3.0.0-beta.1
+FROM ghcr.io/cybernop/vscode-fsh-sushi:3.0.0-beta.1-ubuntu AS  ubuntu
 
 RUN apt update \
     && apt install -y \

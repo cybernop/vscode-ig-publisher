@@ -12,8 +12,11 @@ RUN gem install jekyll
 RUN update-ms-fonts
 
 RUN wget -P /workspaces https://raw.githubusercontent.com/HL7/ig-publisher-scripts/main/_updatePublisher.sh \
-    && chmod a+x /workspaces/_updatePublisher.sh \
-    && sed -i 's/#!\/bin\/bash/#!\/bin\/sh/g' /workspaces/_updatePublisher.sh
+    && chmod a+x /workspaces/_updatePublisher.sh
+
+RUN wget -P /workspaces https://github.com/hapifhir/org.hl7.fhir.core/releases/latest/download/validator_cli.jar \
+    && printf "#!/bin/bash\njava -jar ../validator_cli.jar -html-output validation.html fsh-generated/resources" >> /workspaces/validate.sh \
+    && chmod a+x /workspaces/validate.sh
 
 
 ARG SUSHI_VERSION=
@@ -30,3 +33,7 @@ RUN gem install jekyll
 
 RUN wget -P /workspaces https://raw.githubusercontent.com/HL7/ig-publisher-scripts/main/_updatePublisher.sh \
     && chmod a+x /workspaces/_updatePublisher.sh
+
+RUN wget -P /workspaces https://github.com/hapifhir/org.hl7.fhir.core/releases/latest/download/validator_cli.jar \
+    && printf "#!/bin/bash\njava -jar ../validator_cli.jar -html-output validation.html fsh-generated/resources" >> /workspaces/validate.sh \
+    && chmod a+x /workspaces/validate.sh

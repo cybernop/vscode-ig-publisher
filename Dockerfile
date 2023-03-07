@@ -1,4 +1,5 @@
-FROM ghcr.io/cybernop/vscode-fsh-sushi:3.0.0-beta.1-alpine AS  alpine
+ARG SUSHI_VERSION=
+FROM ghcr.io/cybernop/vscode-fsh-sushi:${SUSHI_VERSION}-alpine AS  alpine
 
 RUN apk update \
     && apk add --no-cache \
@@ -15,7 +16,8 @@ RUN wget -P /workspaces https://raw.githubusercontent.com/HL7/ig-publisher-scrip
     && sed -i 's/#!\/bin\/bash/#!\/bin\/sh/g' /workspaces/_updatePublisher.sh
 
 
-FROM ghcr.io/cybernop/vscode-fsh-sushi:3.0.0-beta.1-ubuntu AS  ubuntu
+ARG SUSHI_VERSION=
+FROM ghcr.io/cybernop/vscode-fsh-sushi:${SUSHI_VERSION}-ubuntu AS  ubuntu
 
 RUN apt update \
     && apt install -y \

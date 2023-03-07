@@ -11,10 +11,10 @@ RUN apk update \
 RUN gem install jekyll
 RUN update-ms-fonts
 
-RUN wget -P -q /workspaces https://raw.githubusercontent.com/HL7/ig-publisher-scripts/main/_updatePublisher.sh \
+RUN wget -q -P /workspaces https://raw.githubusercontent.com/HL7/ig-publisher-scripts/main/_updatePublisher.sh \
     && chmod a+x /workspaces/_updatePublisher.sh
 
-RUN wget -P -q /workspaces https://github.com/hapifhir/org.hl7.fhir.core/releases/latest/download/validator_cli.jar \
+RUN wget -q -P /workspaces https://github.com/hapifhir/org.hl7.fhir.core/releases/latest/download/validator_cli.jar \
     && printf "#!/bin/bash\njava -jar ../validator_cli.jar -html-output validation.html fsh-generated/resources" >> /workspaces/validate.sh \
     && chmod a+x /workspaces/validate.sh
 
@@ -31,9 +31,9 @@ RUN apt update \
 
 RUN gem install jekyll
 
-RUN wget -P -q /workspaces https://raw.githubusercontent.com/HL7/ig-publisher-scripts/main/_updatePublisher.sh \
+RUN wget -q -P /workspaces https://raw.githubusercontent.com/HL7/ig-publisher-scripts/main/_updatePublisher.sh \
     && chmod a+x /workspaces/_updatePublisher.sh
 
-RUN wget -P -q /workspaces https://github.com/hapifhir/org.hl7.fhir.core/releases/latest/download/validator_cli.jar \
+RUN wget -q -P /workspaces https://github.com/hapifhir/org.hl7.fhir.core/releases/latest/download/validator_cli.jar \
     && printf "#!/bin/bash\njava -jar ../validator_cli.jar -html-output validation.html fsh-generated/resources" >> /workspaces/validate.sh \
     && chmod a+x /workspaces/validate.sh
